@@ -17,7 +17,7 @@ class MainViewModel : ViewModel() {
 
 	var shopList = getShopListUseCase.getShopList()
 
-	fun  deleteShopItem(shopItem: ShopItem) {
+	fun deleteShopItem(shopItem: ShopItem) {
 		deleteShopItemUseCase.deleteShopItem(shopItem)
 	}
 
