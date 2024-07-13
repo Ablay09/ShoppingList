@@ -14,29 +14,29 @@ import com.example.shoppinglist.domain.ShopItem
 import com.google.android.material.textfield.TextInputLayout
 
 class ShopItemActivity : AppCompatActivity() {
-	private lateinit var viewModel: ShopItemViewModel
-
-	private lateinit var tilName: TextInputLayout
-	private lateinit var tilCount: TextInputLayout
-	private lateinit var etName: EditText
-	private lateinit var etCount: EditText
-	private lateinit var buttonSave: Button
-
-	private var screenMode: String = MODE_UNKNOWN
-	private var shopItemId: Int = -1
+//	private lateinit var viewModel: ShopItemViewModel
+//
+//	private lateinit var tilName: TextInputLayout
+//	private lateinit var tilCount: TextInputLayout
+//	private lateinit var etName: EditText
+//	private lateinit var etCount: EditText
+//	private lateinit var buttonSave: Button
+//
+//	private var screenMode: String = MODE_UNKNOWN
+//	private var shopItemId: Int = -1
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_shop_item)
-		parseIntent()
-		viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
-		initViews()
-		addTextChangeListeners()
-		launchRightMode()
-		observeViewModel()
+//		parseIntent()
+//		viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
+//		initViews()
+//		addTextChangeListeners()
+//		launchRightMode()
+//		observeViewModel()
 	}
 
-	private fun initViews() {
+	/*private fun initViews() {
 		tilName = findViewById(R.id.til_name)
 		tilCount = findViewById(R.id.til_count)
 		etName = findViewById(R.id.et_name)
@@ -130,7 +130,7 @@ class ShopItemActivity : AppCompatActivity() {
 		buttonSave.setOnClickListener {
 			viewModel.addShopItem(etName.text?.toString(), etCount.text?.toString())
 		}
-	}
+	}*/
 
 	companion object {
 		private const val EXTRA_SCREEN_MODE = "extra_mode"
