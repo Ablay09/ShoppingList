@@ -1,7 +1,5 @@
 package com.example.shoppinglist.presentation
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -65,7 +63,7 @@ class ShopItemFragment(
 			tilName.error = message
 		}
 		viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
-//			finish()
+			activity?.onBackPressedDispatcher
 		}
 	}
 
@@ -143,17 +141,12 @@ class ShopItemFragment(
 		private const val MODE_ADD = "mode_add"
 		private const val MODE_UNKNOWN = ""
 
-		fun newIntentAddItem(context: Context): Intent {
-			val intent = Intent(context, ShopItemActivity::class.java)
-			intent.putExtra(EXTRA_SCREEN_MODE, MODE_ADD)
-			return intent
+		fun newInstanceAddItem(): ShopItemFragment {
+			return ShopItemFragment(MODE_ADD)
 		}
 
-		fun newIntentEditItem(context: Context, shopItemId: Int): Intent {
-			val intent = Intent(context, ShopItemActivity::class.java)
-			intent.putExtra(EXTRA_SCREEN_MODE, MODE_EDIT)
-			intent.putExtra(EXTRA_SHOP_ITEM_ID, shopItemId)
-			return intent
+		fun newInstanceEditItem(shopItemId: Int): ShopItemFragment {
+			return ShopItemFragment(MODE_EDIT, shopItemId)
 		}
 	}
 }
