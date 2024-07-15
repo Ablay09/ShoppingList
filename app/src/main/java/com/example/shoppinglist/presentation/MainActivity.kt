@@ -2,6 +2,7 @@ package com.example.shoppinglist.presentation
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 	private lateinit var viewModel: MainViewModel
 	private lateinit var shopListAdapter: ShopListAdapter
 	private lateinit var rvShopList: RecyclerView
@@ -45,7 +46,8 @@ class MainActivity : AppCompatActivity() {
 				val intent = ShopItemActivity.newIntentAddItem(this)
 				startActivity(intent)
 			} else {
-				launchFragment(ShopItemFragment.newInstanceAddItem())
+				val fragment = ShopItemFragment.newInstanceAddItem()
+				launchFragment(fragment)
 			}
 		}
 	}
@@ -114,5 +116,10 @@ class MainActivity : AppCompatActivity() {
 		}
 		val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
 		itemTouchHelper.attachToRecyclerView(rvShopList)
+	}
+
+	override fun onEditingFinished() {
+		Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
+		supportFragmentManager.popBackStack()
 	}
 }
