@@ -49,4 +49,25 @@ dependencies {
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
+
+	// Coroutines Core
+	implementation(libs.kotlinx.coroutines.core)
+
+	// Coroutines Android
+	implementation(libs.kotlinx.coroutines.android)
+
+	// Room runtime
+	implementation(libs.androidx.room.runtime)
+
+	// Room compiler (Annotation Processor)
+	kapt(libs.androidx.room.compiler)
+
+	// Room Kotlin Extensions and Coroutines support
+	implementation(libs.androidx.room.ktx)
+
+	// Lifecycle ViewModel
+	implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+	// Lifecycle Runtime with Coroutines support
+	implementation(libs.androidx.lifecycle.runtime.ktx)
 }
