@@ -70,4 +70,7 @@ dependencies {
 
 	// Lifecycle Runtime with Coroutines support
 	implementation(libs.androidx.lifecycle.runtime.ktx)
+
+	// Lifecycle LiveData and Transformations support
+	implementation(libs.androidx.lifecycle.livedata.ktx)
 }
