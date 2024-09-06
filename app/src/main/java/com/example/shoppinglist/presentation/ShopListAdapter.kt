@@ -10,8 +10,7 @@ import com.example.shoppinglist.databinding.ItemShopDisabledBinding
 import com.example.shoppinglist.databinding.ItemShopEnabledBinding
 import com.example.shoppinglist.domain.ShopItem
 
-class ShopListAdapter :
-	ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallback()) {
+class ShopListAdapter : ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallback()) {
 
 	var onShopItemLongClickListener: ((ShopItem) -> Unit)? = null
 	var onShopItemClickListener: ((ShopItem) -> Unit)? = null
@@ -43,13 +42,10 @@ class ShopListAdapter :
 		}
 		when (binding) {
 			is ItemShopDisabledBinding -> {
-				binding.tvName.text = shopItem.name
-				binding.tvCount.text = shopItem.count.toString()
+				binding.shopItem = shopItem
 			}
-
 			is ItemShopEnabledBinding -> {
-				binding.tvName.text = shopItem.name
-				binding.tvCount.text = shopItem.count.toString()
+				binding.shopItem = shopItem
 			}
 		}
 	}

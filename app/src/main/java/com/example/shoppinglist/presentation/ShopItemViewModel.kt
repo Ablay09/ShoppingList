@@ -1,19 +1,21 @@
 package com.example.shoppinglist.presentation
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.shoppinglist.data.ShopListRepositoryImpl
 import com.example.shoppinglist.domain.AddShopItemUseCase
 import com.example.shoppinglist.domain.EditShopItemUseCase
 import com.example.shoppinglist.domain.GetShopItemUseCase
 import com.example.shoppinglist.domain.ShopItem
 
-class ShopItemViewModel : ViewModel() {
-	private val repository = ShopListRepositoryImpl
+class ShopItemViewModel(application: Application) : AndroidViewModel(application) {
 
-	private val addShopItemUseCase = AddShopItemUseCase(repository)
+	private val repository = ShopListRepositoryImpl(application)
+
 	private val getShopItemUseCase = GetShopItemUseCase(repository)
+	private val addShopItemUseCase = AddShopItemUseCase(repository)
 	private val editShopItemUseCase = EditShopItemUseCase(repository)
 
 	private val _errorInputName = MutableLiveData<Boolean>()
@@ -61,14 +63,6 @@ class ShopItemViewModel : ViewModel() {
 		}
 	}
 
-	fun resetErrorInputName() {
-		_errorInputName.value = false
-	}
-
-	fun resetErrorInputCount() {
-		_errorInputCount.value = false
-	}
-
 	private fun parseName(inputName: String?): String {
 		return inputName?.trim() ?: ""
 	}
@@ -76,21 +70,30 @@ class ShopItemViewModel : ViewModel() {
 	private fun parseCount(inputCount: String?): Int {
 		return try {
 			inputCount?.trim()?.toInt() ?: 0
-		} catch (exception: Exception) {
+		} catch (e: Exception) {
 			0
 		}
 	}
 
 	private fun validateInput(name: String, count: Int): Boolean {
+		var result = true
 		if (name.isBlank()) {
 			_errorInputName.value = true
-			return false
+			result = false
 		}
 		if (count <= 0) {
 			_errorInputCount.value = true
-			return false
+			result = false
 		}
-		return true
+		return result
+	}
+
+	fun resetErrorInputName() {
+		_errorInputName.value = false
+	}
+
+	fun resetErrorInputCount() {
+		_errorInputCount.value = false
 	}
 
 	private fun finishWork() {

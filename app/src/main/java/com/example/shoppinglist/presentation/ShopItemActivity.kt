@@ -9,8 +9,8 @@ import com.example.shoppinglist.domain.ShopItem
 
 class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 
-	private var screenMode: String = MODE_UNKNOWN
-	private var  shopItemId: Int = ShopItem.UNDEFINED_ID
+	private var screenMode = MODE_UNKNOWN
+	private var shopItemId = ShopItem.UNDEFINED_ID
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -23,6 +23,17 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
 
 	override fun onEditingFinished() {
 		finish()
+	}
+
+	private fun launchRightMode() {
+		val fragment = when (screenMode) {
+			MODE_EDIT -> ShopItemFragment.newInstanceEditItem(shopItemId)
+			MODE_ADD  -> ShopItemFragment.newInstanceAddItem()
+			else      -> throw RuntimeException("Unknown screen mode $screenMode")
+		}
+		supportFragmentManager.beginTransaction()
+			.replace(R.id.shop_item_container, fragment)
+			.commit()
 	}
 
 	private fun parseIntent() {
@@ -42,18 +53,8 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
 		}
 	}
 
-	private fun launchRightMode() {
-		val fragment = when (screenMode) {
-			MODE_EDIT -> ShopItemFragment.newInstanceEditItem(shopItemId)
-			MODE_ADD -> ShopItemFragment.newInstanceAddItem()
-			else -> throw RuntimeException("Unknown screen mode $screenMode")
-		}
-		supportFragmentManager.beginTransaction()
-			.replace(R.id.shop_item_container, fragment)
-			.commit()
-	}
-
 	companion object {
+
 		private const val EXTRA_SCREEN_MODE = "extra_mode"
 		private const val EXTRA_SHOP_ITEM_ID = "extra_shop_item_id"
 		private const val MODE_EDIT = "mode_edit"

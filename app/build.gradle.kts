@@ -65,12 +65,14 @@ dependencies {
 	// Room Kotlin Extensions and Coroutines support
 	implementation(libs.androidx.room.ktx)
 
+	// Lifecycle LiveData and Transformations support
+	implementation(libs.androidx.lifecycle.livedata.ktx)
+	
 	// Lifecycle ViewModel
 	implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
 	// Lifecycle Runtime with Coroutines support
 	implementation(libs.androidx.lifecycle.runtime.ktx)
 
-	// Lifecycle LiveData and Transformations support
-	implementation(libs.androidx.lifecycle.livedata.ktx)
+
 }
