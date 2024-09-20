@@ -74,5 +74,7 @@ dependencies {
 	// Lifecycle Runtime with Coroutines support
 	implementation(libs.androidx.lifecycle.runtime.ktx)
 
-
+	// Dagger dependencies
+	implementation(libs.dagger)
+	kapt(libs.dagger.compiler)
 }
