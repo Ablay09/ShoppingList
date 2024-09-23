@@ -25,6 +25,10 @@
         <activity
             android:name=".presentation.ShopItemActivity"
             android:windowSoftInputMode="adjustResize" />
+        <provider
+            android:authorities="com.example.shoppinglist"
+            android:name=".data.ShopListProvider"
+            android:exported="true" />
     </application>
 
 </manifest>
