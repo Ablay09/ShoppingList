@@ -2,11 +2,20 @@ package com.example.shoppinglist.data
 
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 import android.util.Log
 
 class ShopListProvider : ContentProvider() {
+
+    companion object {
+        private const val GET_SHOP_ITEMS_QUERY =100
+    }
+    private val uriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
+        addURI("com.example.shoppinglist", "shop_items/*", GET_SHOP_ITEMS_QUERY)
+    }
+
     override fun onCreate(): Boolean {
         return true
     }
@@ -18,7 +27,13 @@ class ShopListProvider : ContentProvider() {
         selectionArgs: Array<out String>?,
         cortOrder: String?
     ): Cursor? {
-        log("query $uri")
+        val code = uriMatcher.match(uri)
+        when (code) {
+            GET_SHOP_ITEMS_QUERY -> {
+
+            }
+        }
+        log("query uri=$uri, code=$code")
         return null
     }
 
